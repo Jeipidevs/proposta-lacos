@@ -121,34 +121,6 @@
   }
 
   /* VIEW TOGGLE */
-  .view-toggle {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    position: fixed;
-    top: 14px; right: 16px;
-    z-index: 200;
-  }
-  .toggle-btn {
-    background: rgba(10,10,10,0.8);
-    border: 1px solid rgba(215,165,95,0.2);
-    color: rgba(245,235,215,0.5);
-    padding: 5px 11px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s;
-    backdrop-filter: blur(8px);
-  }
-  .toggle-btn.active {
-    background: var(--dourado);
-    color: var(--carvao);
-    border-color: var(--dourado);
-    font-weight: 600;
-  }
 
   /* ─── SLIDE HEADER ─── */
   .sh {
@@ -1579,10 +1551,6 @@
 <body>
 
 <!-- VIEW TOGGLE -->
-<div class="view-toggle">
-  <button class="toggle-btn active" id="btn-desktop" onclick="setMode('desktop')">Desktop</button>
-  <button class="toggle-btn" id="btn-mobile" onclick="setMode('mobile')">Mobile</button>
-</div>
 
 <div id="presentation">
 
@@ -1991,20 +1959,9 @@
     if (Math.abs(diff) > 50) go(diff > 0 ? 1 : -1);
   }, { passive: true });
 
-  // Mode toggle
   function setMode(mode) {
     mobileMode = mode === 'mobile';
     document.body.classList.toggle('mobile-mode', mobileMode);
-    document.getElementById('btn-desktop').classList.toggle('active', !mobileMode);
-    document.getElementById('btn-mobile').classList.toggle('active', mobileMode);
-
-    if (!mobileMode) {
-      // Reset to slide 1 when going back to desktop
-      const slides = document.querySelectorAll('.slide');
-      slides.forEach((s, i) => {
-        s.classList.toggle('active', i === cur);
-      });
-    }
   }
 
   // Auto-detect on load
